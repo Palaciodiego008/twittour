@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -13,7 +14,7 @@ import (
 var MongoConn = MongoConnection()
 
 // ClientOptions is the options for the connection
-var clientOptions = options.Client().ApplyURI("mongodb+srv://diegodapo77:<Dapo0917>@twitt.fcdyfbk.mongodb.net/?retryWrites=true&w=majority")
+var clientOptions = options.Client().ApplyURI(applyURI())
 
 // MongoConnection is the function that connects to the database
 func MongoConnection() *mongo.Client {
@@ -44,4 +45,11 @@ func CheckConnection() int {
 		return 0
 	}
 	return 1
+}
+
+func applyURI() string {
+	user := os.Getenv("MONGO_USER")
+	password := os.Getenv("MONGO_PASSWORD")
+
+	return "mongodb+srv://" + user + ":" + "<" + password + ">" + "@twitt.fcdyfbk.mongodb.net/?retryWrites=true&w=majority"
 }
