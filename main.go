@@ -1,7 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"log"
+	"twittour/db"
+	"twittour/handlers"
+)
 
 func main() {
-	fmt.Println("Twittour")
+
+	if db.CheckConnection() == 0 {
+		log.Fatal("No connection to the database")
+		return
+	}
+
+	handlers.Handlers()
+
 }
