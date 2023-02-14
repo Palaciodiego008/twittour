@@ -1,1 +1,3 @@
 #TWITTOUR
+
+Application simulating Twitter.
